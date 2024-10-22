@@ -28,5 +28,5 @@ Open the requirements.txt file to ensure it contains the list of installed packa
 # When you are done with making changes disconnect from venv
 
 ```
-disconnect
+deactivate
 ```
