@@ -1,9 +1,12 @@
 import pandas as pd
 import numpy as np
 
-#Put all cleaning steps here
-df = pd.read_csv('cfs_data.csv')
+# import excel
+# Read the Excel file, skipping the first 9 rows
+df = pd.read_excel('CFS DATA SET.xlsx', skiprows=9)
+df = df.loc[:, ~df.columns.str.contains('^Unnamed')]
 
+# Display the first few rows of the DataFrame
 df.head()
 
 file_path = 'cfs_data_cleaned.csv'
@@ -36,12 +39,19 @@ print(location_to_common_name)
 df['Common Name'] = df['Location'].map(location_to_common_name).fillna(df['Common Name'])
 
 # Remove apt and bldg from Location
-df['Unit'] = df['Location'].str.extract(r'(?i)((?:apt|bldg)\s+\d+)', expand=False)
-df.insert(9,"Unit", df.pop("Unit"))
+df['Apt/Building'] = df['Location'].str.extract(r'(?i)((?:apt|bldg).*)', expand=False)
+# Remove the extracted substring from Location
+df['Location'] = df.apply(lambda row: row['Location'].replace(row['Apt/Building'], '').strip() if pd.notnull(row['Apt/Building']) else row['Location'], axis=1)
 
+# Insert the 'Apt/Building' column at the 9th position
+df.insert(9, "Apt/Building", df.pop("Apt/Building"))
+
+# Mark combined incidents
 df['Combined'] = df['Incident Type'].str.contains('combined', case=False, regex=True)
 df.insert(8,"Combined", df.pop("Combined"))
 df['Incident Type'] = df['Incident Type'].str.replace(r'combined', '', case=False, regex=True).str.strip()
+
+df['Location 2'] = 'Maryland'
 
 df.to_csv(file_path, index=False)
 
