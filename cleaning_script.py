@@ -3,8 +3,10 @@ import numpy as np
 
 # import excel
 # Read the Excel file, skipping the first 9 rows
+print('importing data...')
 df = pd.read_excel('CFS DATA SET.xlsx', skiprows=9)
 df = df.loc[:, ~df.columns.str.contains('^Unnamed')]
+
 
 # Display the first few rows of the DataFrame
 df.head()
@@ -33,6 +35,7 @@ most_frequent_common_name = filtered_counts.loc[filtered_counts.groupby('Locatio
 # Create a dictionary with 'Location' as the key and the most frequent 'Common Name' as the value
 location_to_common_name = most_frequent_common_name.set_index('Location')['Common Name'].to_dict()
 
+print('converted location to common name')
 print(location_to_common_name)
 
 # Replace items in the 'Common Name' column that match 'Location' in the dictionary
@@ -51,9 +54,9 @@ df['Combined'] = df['Incident Type'].str.contains('combined', case=False, regex=
 df.insert(8,"Combined", df.pop("Combined"))
 df['Incident Type'] = df['Incident Type'].str.replace(r'combined', '', case=False, regex=True).str.strip()
 
-df['Location 2'] = 'Maryland'
+df['County'] = 'Prince George\'s County'
+df['State'] = 'Maryland'
 
 df.to_csv(file_path, index=False)
 
-
-df.head()
+print('data cleaned and saved to', file_path)
