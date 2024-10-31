@@ -8,7 +8,7 @@ class FileCleanerApp(QMainWindow):
         self.initUI()
     
     def initUI(self):
-        self.setWindowTitle('File Cleaner')
+        self.setWindowTitle('Police Data File Cleaner')
         self.setGeometry(300, 300, 400, 200)
         self.label = QLabel('Drag and drop a file or click "Open File" to clean it', self)
         self.label.setGeometry(10, 20, 380, 40)
@@ -24,7 +24,7 @@ class FileCleanerApp(QMainWindow):
             self.clean_file(file_path)
     
     def clean_file(self, file_path):
-        result = subprocess.run(['python', 'clean_script.py', file_path], capture_output=True, text=True)
+        result = subprocess.run(['python', 'cleaning_script.py', file_path], capture_output=True, text=True)
         if result.returncode == 0:
             QMessageBox.information(self, "Success", "File cleaned and saved successfully!")
         else:
