@@ -26,7 +26,8 @@ class FileCleanerApp(QMainWindow):
     def clean_file(self, file_path):
         result = subprocess.run(['python', 'cleaning_script.py', file_path], capture_output=True, text=True)
         if result.returncode == 0:
-            QMessageBox.information(self, "Success", "File cleaned and saved successfully!")
+            cleaned_file_path = result.stdout.strip()
+            QMessageBox.information(self, "Success", f"File cleaned and saved successfully to:\n{cleaned_file_path}")
         else:
             QMessageBox.warning(self, "Error", f"Failed to clean file. \n{result.stderr}")
 

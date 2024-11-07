@@ -3,7 +3,6 @@ import numpy as np
 
 # import excel
 # Read the Excel file, skipping the first 9 rows
-print('importing data...')
 df = pd.read_excel('CFS DATA SET.xlsx', skiprows=9)
 df = df.loc[:, ~df.columns.str.contains('^Unnamed')]
 
@@ -34,9 +33,6 @@ most_frequent_common_name = filtered_counts.loc[filtered_counts.groupby('Locatio
 
 # Create a dictionary with 'Location' as the key and the most frequent 'Common Name' as the value
 location_to_common_name = most_frequent_common_name.set_index('Location')['Common Name'].to_dict()
-
-print('converted location to common name')
-print(location_to_common_name)
 
 # Replace items in the 'Common Name' column that match 'Location' in the dictionary
 df['Common Name'] = df['Location'].map(location_to_common_name).fillna(df['Common Name'])
