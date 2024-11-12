@@ -1,5 +1,6 @@
 import pandas as pd
 import numpy as np
+import os
 
 # import excel
 # Read the Excel file, skipping the first 9 rows
@@ -10,9 +11,6 @@ def cleanFile(file_path):
     df = df.loc[:, ~df.columns.str.contains('^Unnamed')]
 # Display the first few rows of the DataFrame
     df.head()
-
-    file_path = 'cfs_data_cleaned.csv'
-
     # Remove Appox Loc from Location
     df['Location'] = df['Location'].str.replace('Approx Loc:', '', case=False)
 
@@ -54,6 +52,8 @@ def cleanFile(file_path):
     df['County'] = 'Prince George\'s County'
     df['State'] = 'Maryland'
 
-    df.to_csv(file_path, index=False)
-
-    print('data cleaned and saved to', file_path)
+    df.to_csv("cfs_data_cleaned.csv", index=False)
+    
+    
+    
+    

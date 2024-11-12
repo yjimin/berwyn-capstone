@@ -1,6 +1,8 @@
 from PyQt5.QtWidgets import QApplication, QMainWindow, QLabel, QPushButton, QFileDialog, QMessageBox
 import sys
 import subprocess
+import cleaning_script
+import os
 
 class FileCleanerApp(QMainWindow):
     def __init__(self):
@@ -20,16 +22,16 @@ class FileCleanerApp(QMainWindow):
     def open_file(self):
         options = QFileDialog.Options()
         file_path, _ = QFileDialog.getOpenFileName(self, "Open File", "", "All Files (*);;Text Files (*.txt)", options=options)
-        if file_path:
+        if ".csv" in file_path:
             self.clean_file(file_path)
+        else:
+            QMessageBox.warning(self, "Error", f"Failed to clean file. \n{file_path}")
     
     def clean_file(self, file_path):
-        result = subprocess.run(['python', 'cleaning_script.py', file_path], capture_output=True, text=True)
-        if result.returncode == 0:
-            cleaned_file_path = result.stdout.strip()
-            QMessageBox.information(self, "Success", f"File cleaned and saved successfully to:\n{cleaned_file_path}")
-        else:
-            QMessageBox.warning(self, "Error", f"Failed to clean file. \n{result.stderr}")
+        subprocess.run(['python', 'cleaning_script.py', file_path], capture_output=False)
+        abs_path = os.path.abspath("cfs_data_cleaned.csv")
+        QMessageBox.information(self, "Success", f"File cleaned and saved successfully to:\n ${abs_path}")
+            
 
 app = QApplication(sys.argv)
 window = FileCleanerApp()
