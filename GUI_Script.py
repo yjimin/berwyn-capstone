@@ -22,14 +22,14 @@ class FileCleanerApp(QMainWindow):
     def open_file(self):
         options = QFileDialog.Options()
         file_path, _ = QFileDialog.getOpenFileName(self, "Open File", "", "All Files (*);;Text Files (*.txt)", options=options)
-        if ".csv" in file_path:
+        if ".xlsx" in file_path:
             self.clean_file(file_path)
         else:
             QMessageBox.warning(self, "Error", f"Failed to clean file. \n{file_path}")
     
     def clean_file(self, file_path):
         subprocess.run(['python', 'cleaning_script.py', file_path], capture_output=False)
-        abs_path = os.path.abspath("cfs_data_cleaned.csv")
+        abs_path = os.path.abspath("hxbxdjfbsdjkfviuk")
         QMessageBox.information(self, "Success", f"File cleaned and saved successfully to:\n ${abs_path}")
             
 
