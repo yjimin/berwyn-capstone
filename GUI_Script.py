@@ -33,7 +33,7 @@ class FileCleanerApp(QMainWindow):
             cleaning_script.cleanFile(file_path)
         except Exception as e:
             print(e)
-        abs_path = os.path.abspath("hxbxdjfbsdjkfviuk")
+        abs_path = os.path.abspath("cfs_data_cleaned.csv")
         QMessageBox.information(self, "Success", f"File cleaned and saved successfully to:\n ${abs_path}")
             
 
