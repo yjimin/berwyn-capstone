@@ -28,7 +28,11 @@ class FileCleanerApp(QMainWindow):
             QMessageBox.warning(self, "Error", f"Failed to clean file. \n{file_path}")
     
     def clean_file(self, file_path):
-        subprocess.run(['python', 'cleaning_script.py', file_path], capture_output=False)
+        # subprocess.run(['python', 'cleaning_script.py', file_path], capture_output=False)
+        try:
+            cleaning_script.cleanFile(file_path)
+        except Exception as e:
+            print(e)
         abs_path = os.path.abspath("hxbxdjfbsdjkfviuk")
         QMessageBox.information(self, "Success", f"File cleaned and saved successfully to:\n ${abs_path}")
             
