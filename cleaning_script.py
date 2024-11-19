@@ -13,6 +13,7 @@ def cleanFile(file_path):
       df = df.loc[:, ~df.columns.str.contains('^Unnamed')]
   # Display the first few rows of the DataFrame
       df.head()
+
       # Remove Appox Loc from Location
       df['Location'] = df['Location'].str.replace('Approx Loc:', '', case=False)
 
@@ -53,6 +54,13 @@ def cleanFile(file_path):
 
       df['County'] = 'Prince George\'s County'
       df['State'] = 'Maryland'
+      # Split 'Date' into Month, Day, and Year
+      df['Month'] = pd.to_datetime(df['Date']).dt.month
+      df['Day'] = pd.to_datetime(df['Date']).dt.day
+      df['Year'] = pd.to_datetime(df['Date']).dt.year
+      
+      # Drop the 'Date' column
+      df.drop('Date', axis=1, inplace=True)
 
       df.to_csv("cfs_data_cleaned.csv", index=False)
     except Exception as e:
