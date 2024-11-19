@@ -54,13 +54,18 @@ def cleanFile(file_path):
 
       df['County'] = 'Prince George\'s County'
       df['State'] = 'Maryland'
-      # Split 'Date' into Month, Day, and Year
-      df['Month'] = pd.to_datetime(df['Date']).dt.month
-      df['Day'] = pd.to_datetime(df['Date']).dt.day
-      df['Year'] = pd.to_datetime(df['Date']).dt.year
       
-      # Drop the 'Date' column
-      df.drop('Date', axis=1, inplace=True)
+      # Ensure 'Date' is parsed correctly
+      df['Date'] = pd.to_datetime(df['Date'], format='%m/%d/%Y', errors='coerce')
+
+      # Check for any rows where 'Date' conversion failed
+      if df['Date'].isnull().any():
+          print("Warning: Some dates could not be parsed and have been set to NaT")
+
+      # Split 'Date' into Month, Day, and Year
+      df['Month'] = df['Date'].dt.month
+      df['Day'] = df['Date'].dt.day
+      df['Year'] = df['Date'].dt.year
 
       df.to_csv("cfs_data_cleaned.csv", index=False)
     except Exception as e:
