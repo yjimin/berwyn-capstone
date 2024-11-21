@@ -4,7 +4,7 @@ Do this in command line in your directory before running the cleaning script:
 
 ```
 python3 -m venv venv
-source .venv/bin/activate  # On macOS/Linux
+source ./venv/bin/activate  # On macOS/Linux
 .\venv\Scripts\activate   # On Windows
 pip install -r requirements.txt
 ```
