@@ -78,3 +78,9 @@ A window like the following will render:
 ![1732224690972](image/README/1732224690972.png)
 
 Select **Open File** and navigate towards the unclean Excel spreadsheet. It will take a moment before logging a popup saying that the data was cleaned. You can then continue to import this into ArcGIS online.
+
+# Demo
+
+A demo can be viewed by visiting the following link:
+
+[Watch Demo](https://drive.google.com/file/d/11oQrL_rfmY-b8t2nqrK0ZIcyl0SuV5Ph/view?usp=share_link)
