@@ -14,12 +14,9 @@ Technical Specialist - Adam Rodriguez
 
 Technical Specialist - Jimin Yoon
 
-
 ### Project Description
 
 Title: Town of Berwyn Heights Policing Assessment and Mapping
-
-
 
 High Level overview:
 
@@ -28,7 +25,6 @@ The police department of Berwyn Heights wants more organization and understandin
 To solve this, our group analyzed two crime datasets given to us by the Berwyn Heights Police Department and created a visualization of the data on a map.
 
 The goal of this deliverable is to inform decision-makers on important issues involving the town agenda and crime.
-
 
 # Usage
 
@@ -40,7 +36,7 @@ Do this in command line in your directory before running the cleaning script:
 python3 -m venv venv
 source ./venv/bin/activate  # On macOS/Linux
 .\venv\Scripts\activate   # On Windows
-pip install -r requirements.txt
+pip install -r src/requirements.txt
 ```
 
 ## When you make changes do this workflow:
@@ -74,12 +70,11 @@ deactivate
 Run the GUI script to open the cleaning tool window through the following:
 
 ```bash
-python GUI_Script.py
+python src/GUI_Script.py
 ```
 
 A window like the following will render:
 
 ![1732224690972](image/README/1732224690972.png)
-
 
 Select **Open File** and navigate towards the unclean Excel spreadsheet. It will take a moment before logging a popup saying that the data was cleaned. You can then continue to import this into ArcGIS online.
